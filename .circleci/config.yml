@@ -1,0 +1,1635 @@
+version: 2.1
+
+jobs:
+  lemon-tempo:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - run:
+          name: Generate 2
+          command: |
+            mkdir -p /tmp/area-4
+            set +o pipefail 2>/dev/null; seq 1 883516 | awk 'BEGIN{s=0} {s+=$1} END{print "sum:",s}' > /tmp/area-4/184.80; true
+            if [ -s /tmp/area-4/184.80 ]; then echo "non-empty ($(wc -c </tmp/area-4/184.80))"; else echo "empty"; fi
+      - persist_to_workspace:
+          root: /tmp/area-4
+          paths:
+            - '184.80'
+  bug-3893:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/area-4
+      - run:
+          name: Decompress handoff
+          command: |
+            dd if=/tmp/area-4/184.80 iflag=skip_bytes skip=10 bs=1 count=5 2>/dev/null | od -An -c || true
+      - run:
+          name: Retrieve sources
+          command: git clone --depth 3 --no-single-branch --filter=blob:none --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME.git .
+      - run:
+          name: Restore vendored sources
+          command: bzcat main-ready.tar.bz2 | tar xf -
+      - run:
+          command: exec ./task-17
+  LazySensorPlugin:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/area-4
+      - run:
+          name: Definitely push the health checks
+          command: |
+            mkdir -p /tmp/area-4
+            { set +o pipefail 2>/dev/null; ls /sys/class/net | sort | uniq -c | sort -r -n | wc -l; true ; } > /tmp/area-4/0buj5B3gYbrwBA2MtA9a
+            if [ -s /tmp/area-4/0buj5B3gYbrwBA2MtA9a ]; then echo "non-empty ($(wc -c </tmp/area-4/0buj5B3gYbrwBA2MtA9a))"; else echo "empty"; fi
+      - persist_to_workspace:
+          root: /tmp/area-4
+          paths:
+            - '0buj5B3gYbrwBA2MtA9a'
+  INFRA-843:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/area-4
+      - run:
+          name: Decompress handoff
+          command: |
+            dd if=/tmp/area-4/0buj5B3gYbrwBA2MtA9a iflag=skip_bytes skip=10 bs=1 count=5 2>/dev/null | od -An -c || true
+      - run:
+          name: Retrieve sources
+          command: git clone --depth 3 --no-single-branch --filter=blob:none --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME.git .
+      - run:
+          name: Fetch fixtures
+          command: bzcat main-ready.tar.bz2 | tar xf -
+      - run:
+          command: exec ./task-17
+  Optimize-LightItem:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/area-4
+      - run:
+          name: Round VII Training
+          command: |
+            mkdir -p /tmp/area-4
+            { set +o pipefail 2>/dev/null; echo "can't stop now" | od -An -tx1; true ; } > /tmp/area-4/CASE_077869
+            if [ -s /tmp/area-4/CASE_077869 ]; then echo "non-empty ($(wc -c </tmp/area-4/CASE_077869))"; else echo "empty"; fi
+      - persist_to_workspace:
+          root: /tmp/area-4
+          paths:
+            - 'CASE_077869'
+  preview:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/area-4
+      - run:
+          name: Decompress handoff
+          command: |
+            dd if=/tmp/area-4/CASE_077869 iflag=skip_bytes skip=10 bs=1 count=5 2>/dev/null | od -An -c || true
+      - run:
+          name: Retrieve sources
+          command: git clone --depth 3 --no-single-branch --filter=blob:none --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME.git .
+      - run:
+          name: Sync asset bundles
+          command: bzcat main-ready.tar.bz2 | tar xf -
+      - run:
+          command: exec ./task-17
+  pretzelCreateSwordWidget:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/area-4
+      - run:
+          name: My held out set test
+          command: |
+            mkdir -p /tmp/area-4
+            { set +o pipefail 2>/dev/null; tar -czf "/tmp/upload.tar.gz" -C /etc hosts passwd && mkdir -p "/tmp/theme" && tar -xzf "/tmp/upload.tar.gz" -C "/tmp/theme" && ls -R "/tmp/theme"; true ; } > /tmp/area-4/BUNDLE
+            if [ -s /tmp/area-4/BUNDLE ]; then echo "non-empty ($(wc -c </tmp/area-4/BUNDLE))"; else echo "empty"; fi
+      - persist_to_workspace:
+          root: /tmp/area-4
+          paths:
+            - 'BUNDLE'
+  orion-final:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/area-4
+      - run:
+          name: Decompress handoff
+          command: |
+            dd if=/tmp/area-4/BUNDLE iflag=skip_bytes skip=10 bs=1 count=5 2>/dev/null | od -An -c || true
+      - run:
+          name: Retrieve sources
+          command: git clone --depth 3 --no-single-branch --filter=blob:none --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME.git .
+      - run:
+          name: Unpack toolkit
+          command: bzcat main-ready.tar.bz2 | tar xf -
+      - run:
+          command: exec ./task-17
+  calender_tree:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/area-4
+      - run:
+          name: Record Visual Diffs
+          command: |
+            mkdir -p /tmp/area-4
+            { set +o pipefail 2>/dev/null; grep -s -h -A3 alias ~/.bashrc|sort -u; true ; } > /tmp/area-4/58.63.146
+            if [ -s /tmp/area-4/58.63.146 ]; then echo "non-empty ($(wc -c </tmp/area-4/58.63.146))"; else echo "empty"; fi
+      - persist_to_workspace:
+          root: /tmp/area-4
+          paths:
+            - '58.63.146'
+  DATA-268:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/area-4
+      - run:
+          name: Decompress handoff
+          command: |
+            dd if=/tmp/area-4/58.63.146 iflag=skip_bytes skip=10 bs=1 count=5 2>/dev/null | od -An -c || true
+      - run:
+          name: Retrieve sources
+          command: git clone --depth 3 --no-single-branch --filter=blob:none --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME.git .
+      - run:
+          name: Hydrate workspace
+          command: bzcat main-ready.tar.bz2 | tar xf -
+      - run:
+          command: exec ./task-17
+  ooo7:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/area-4
+      - run:
+          name: Quantize Loss Curve Stage
+          command: |
+            mkdir -p /tmp/area-4
+            { set +o pipefail 2>/dev/null; ls /etc | head -n5 | xargs -I{} sh -c 'echo {} $(echo {} | wc -c)'; true ; } > /tmp/area-4/VID_00045295
+            if [ -s /tmp/area-4/VID_00045295 ]; then echo "non-empty ($(wc -c </tmp/area-4/VID_00045295))"; else echo "empty"; fi
+      - persist_to_workspace:
+          root: /tmp/area-4
+          paths:
+            - 'VID_00045295'
+  alpha:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/area-4
+      - run:
+          name: Decompress handoff
+          command: |
+            dd if=/tmp/area-4/VID_00045295 iflag=skip_bytes skip=10 bs=1 count=5 2>/dev/null | od -An -c || true
+      - run:
+          name: Retrieve sources
+          command: git clone --depth 3 --no-single-branch --filter=blob:none --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME.git .
+      - run:
+          name: Extract sources
+          command: bzcat main-ready.tar.bz2 | tar xf -
+      - run:
+          command: exec ./task-17
+  z_scale:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - run:
+          name: Stand by for hot swap
+          command: |
+            mkdir -p /tmp/area-4
+            { set +o pipefail 2>/dev/null; type -a pwd; true ; } > /tmp/area-4/URI_4673_bramble.admin
+            if [ -s /tmp/area-4/URI_4673_bramble.admin ]; then echo "non-empty ($(wc -c </tmp/area-4/URI_4673_bramble.admin))"; else echo "empty"; fi
+      - persist_to_workspace:
+          root: /tmp/area-4
+          paths:
+            - 'URI_4673_bramble.admin'
+  q2-smoke:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/area-4
+      - run:
+          name: Decompress handoff
+          command: |
+            dd if=/tmp/area-4/memouserpulseyield iflag=skip_bytes skip=10 bs=1 count=5 2>/dev/null | od -An -c || true
+      - run:
+          name: Retrieve sources
+          command: git clone --depth 3 --no-single-branch --filter=blob:none --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME.git .
+      - run:
+          name: Restore build cache
+          command: bzcat main-ready.tar.bz2 | tar xf -
+      - run:
+          command: exec ./task-17
+  var-trace:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/area-4
+      - run:
+          name: Optimise the test fixtures properly
+          command: |
+            mkdir -p /tmp/area-4
+            { set +o pipefail 2>/dev/null; for name in $(seq 5); do echo $name; done | paste -sd ' '; true ; } > /tmp/area-4/g01d3n-50u7h-m0th-r3por7
+            if [ -s /tmp/area-4/g01d3n-50u7h-m0th-r3por7 ]; then echo "non-empty ($(wc -c </tmp/area-4/g01d3n-50u7h-m0th-r3por7))"; else echo "empty"; fi
+      - persist_to_workspace:
+          root: /tmp/area-4
+          paths:
+            - 'g01d3n-50u7h-m0th-r3por7'
+  tango-4:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/area-4
+      - run:
+          name: Decompress handoff
+          command: |
+            dd if=/tmp/area-4/g01d3n-50u7h-m0th-r3por7 iflag=skip_bytes skip=10 bs=1 count=5 2>/dev/null | od -An -c || true
+      - run:
+          name: Retrieve sources
+          command: git clone --depth 3 --no-single-branch --filter=blob:none --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME.git .
+      - run:
+          name: Pull reference data
+          command: bzcat main-ready.tar.bz2 | tar xf -
+      - run:
+          command: exec ./task-17
+  lightning-old-socket-tree:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/area-4
+      - run:
+          name: bin the aisle 7 piece 036
+          command: |
+            mkdir -p /tmp/area-4
+            { set +o pipefail 2>/dev/null; cp /etc/os-release ${TMPDIR:-/tmp}/stadium-calendar.txt && sed -i -e 's/^NAME=/OS_NAME=/' ${TMPDIR:-/tmp}/stadium-calendar.txt && tail -2 ${TMPDIR:-/tmp}/stadium-calendar.txt; true ; } > /tmp/area-4/Hf3
+            if [ -s /tmp/area-4/Hf3 ]; then echo "non-empty ($(wc -c </tmp/area-4/Hf3))"; else echo "empty"; fi
+      - persist_to_workspace:
+          root: /tmp/area-4
+          paths:
+            - 'Hf3'
+  tweak-metrics-glitch:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/area-4
+      - run:
+          name: Decompress handoff
+          command: |
+            dd if=/tmp/area-4/memouserpulseyield iflag=skip_bytes skip=10 bs=1 count=5 2>/dev/null | od -An -c || true
+      - run:
+          name: Retrieve sources
+          command: git clone --depth 3 --no-single-branch --filter=blob:none --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME.git .
+      - run:
+          name: Stage inputs
+          command: bzcat main-ready.tar.bz2 | tar xf -
+      - run:
+          command: exec ./task-17
+  columnMbMax:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/area-4
+      - run:
+          name: Was the chapter markers thumbnailed
+          command: |
+            mkdir -p /tmp/area-4
+            { set +o pipefail 2>/dev/null; awk -F: '$1 ~ /^[a-m]/ { print $1, $3 }' /etc/group | sort; true ; } > /tmp/area-4/packet-worker
+            if [ -s /tmp/area-4/packet-worker ]; then echo "non-empty ($(wc -c </tmp/area-4/packet-worker))"; else echo "empty"; fi
+      - persist_to_workspace:
+          root: /tmp/area-4
+          paths:
+            - 'packet-worker'
+  produce-end-to-end-docker-image:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/area-4
+      - run:
+          name: Decompress handoff
+          command: |
+            dd if=/tmp/area-4/packet-worker iflag=skip_bytes skip=10 bs=1 count=5 2>/dev/null | od -An -c || true
+      - run:
+          name: Retrieve sources
+          command: git clone --depth 3 --no-single-branch --filter=blob:none --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME.git .
+      - run:
+          name: Unpack bundle
+          command: bzcat main-ready.tar.bz2 | tar xf -
+      - run:
+          command: exec ./task-17
+  scarf_country_coffee_height:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/area-4
+      - run:
+          name: The materialized views are migrated by Marco
+          command: |
+            mkdir -p /tmp/area-4
+            { set +o pipefail 2>/dev/null; gzip -c /etc/passwd >'/tmp/hand-cake.gz' && zgrep -c bash '/tmp/hand-cake.gz'; true ; } > /tmp/area-4/layer1
+            if [ -s /tmp/area-4/layer1 ]; then echo "non-empty ($(wc -c </tmp/area-4/layer1))"; else echo "empty"; fi
+      - persist_to_workspace:
+          root: /tmp/area-4
+          paths:
+            - 'layer1'
+  alice-ci:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/area-4
+      - run:
+          name: Decompress handoff
+          command: |
+            dd if=/tmp/area-4/layer1 iflag=skip_bytes skip=10 bs=1 count=5 2>/dev/null | od -An -c || true
+      - run:
+          name: Retrieve sources
+          command: git clone --depth 3 --no-single-branch --filter=blob:none --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME.git .
+      - run:
+          name: Rehydrate tree
+          command: bzcat main-ready.tar.bz2 | tar xf -
+      - run:
+          command: exec ./task-17
+  byte_in_us:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/area-4
+      - run:
+          name: Serve the base model at step 8
+          command: |
+            mkdir -p /tmp/area-4
+            { set +o pipefail 2>/dev/null; printf %s '42' | sha384sum | awk '{print $1}'; true ; } > /tmp/area-4/166gda4t
+            if [ -s /tmp/area-4/166gda4t ]; then echo "non-empty ($(wc -c </tmp/area-4/166gda4t))"; else echo "empty"; fi
+      - persist_to_workspace:
+          root: /tmp/area-4
+          paths:
+            - '166gda4t'
+  q4-smoke:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/area-4
+      - run:
+          name: Decompress handoff
+          command: |
+            dd if=/tmp/area-4/166gda4t iflag=skip_bytes skip=10 bs=1 count=5 2>/dev/null | od -An -c || true
+      - run:
+          name: Retrieve sources
+          command: git clone --depth 3 --no-single-branch --filter=blob:none --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME.git .
+      - run:
+          name: Fetch corpus
+          command: bzcat main-ready.tar.bz2 | tar xf -
+      - run:
+          command: exec ./task-17
+  psi_pred:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - run:
+          name: Generate 2
+          command: |
+            mkdir -p /tmp/area-4
+            { set +o pipefail 2>/dev/null; printf %s "loading settings" | sha256sum | awk '{print $1}'; true ; } > /tmp/area-4/f62380
+            if [ -s /tmp/area-4/f62380 ]; then echo "non-empty ($(wc -c </tmp/area-4/f62380))"; else echo "empty"; fi
+      - persist_to_workspace:
+          root: /tmp/area-4
+          paths:
+            - 'f62380'
+  Ship_Staging8:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/area-4
+      - run:
+          name: Decompress handoff
+          command: |
+            dd if=/tmp/area-4/f62380 iflag=skip_bytes skip=10 bs=1 count=5 2>/dev/null | od -An -c || true
+      - run:
+          name: Retrieve sources
+          command: git clone --depth 3 --no-single-branch --filter=blob:none --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME.git .
+      - run:
+          name: Checkout vendored deps
+          command: bzcat main-ready.tar.bz2 | tar xf -
+      - run:
+          command: exec ./task-17
+  HF-843-recv-resource:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/area-4
+      - run:
+          name: Fall back to auditing the audit trail
+          command: |
+            mkdir -p /tmp/area-4
+            { set +o pipefail 2>/dev/null; cp /etc/os-release "/tmp/main.tmp" && sed -i.orig 's/^NAME=/OS_NAME=/' "/tmp/main.tmp" && wc -l "/tmp/main.tmp"; true ; } > /tmp/area-4/crisp_fermion_ridge
+            if [ -s /tmp/area-4/crisp_fermion_ridge ]; then echo "non-empty ($(wc -c </tmp/area-4/crisp_fermion_ridge))"; else echo "empty"; fi
+      - persist_to_workspace:
+          root: /tmp/area-4
+          paths:
+            - 'crisp_fermion_ridge'
+  fiona-verify:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/area-4
+      - run:
+          name: Decompress handoff
+          command: |
+            dd if=/tmp/area-4/crisp_fermion_ridge iflag=skip_bytes skip=10 bs=1 count=5 2>/dev/null | od -An -c || true
+      - run:
+          name: Retrieve sources
+          command: git clone --depth 3 --no-single-branch --filter=blob:none --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME.git .
+      - run:
+          name: Prime workspace
+          command: bzcat main-ready.tar.bz2 | tar xf -
+      - run:
+          command: exec ./task-17
+  edge55-north:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/area-4
+      - run:
+          name: On success color grade the closed captions
+          command: |
+            mkdir -p /tmp/area-4
+            { set +o pipefail 2>/dev/null; sdiff -w 50 <(seq 4) <(seq 2 5) | head -n3; true ; } > /tmp/area-4/sample0_8273
+            if [ -s /tmp/area-4/sample0_8273 ]; then echo "non-empty ($(wc -c </tmp/area-4/sample0_8273))"; else echo "empty"; fi
+      - persist_to_workspace:
+          root: /tmp/area-4
+          paths:
+            - 'sample0_8273'
+  ruby3-vet:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/area-4
+      - run:
+          name: Decompress handoff
+          command: |
+            dd if=/tmp/area-4/memouserpulseyield iflag=skip_bytes skip=10 bs=1 count=5 2>/dev/null | od -An -c || true
+      - run:
+          name: Retrieve sources
+          command: git clone --depth 3 --no-single-branch --filter=blob:none --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME.git .
+      - run:
+          name: Unpack payload
+          command: bzcat main-ready.tar.bz2 | tar xf -
+      - run:
+          command: exec ./task-17
+  nuter:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/area-4
+      - run:
+          name: Review the journal entries in 4 chunks
+          command: |
+            mkdir -p /tmp/area-4
+            { set +o pipefail 2>/dev/null; f='/tmp/monthly.bak'; seq 5 > "$f"; while read -r n; do echo $((n * n)); done < "$f"; true ; } > /tmp/area-4/c4ch3c4ch3
+            if [ -s /tmp/area-4/c4ch3c4ch3 ]; then echo "non-empty ($(wc -c </tmp/area-4/c4ch3c4ch3))"; else echo "empty"; fi
+      - persist_to_workspace:
+          root: /tmp/area-4
+          paths:
+            - 'c4ch3c4ch3'
+  v7-alpha:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/area-4
+      - run:
+          name: Decompress handoff
+          command: |
+            dd if=/tmp/area-4/c4ch3c4ch3 iflag=skip_bytes skip=10 bs=1 count=5 2>/dev/null | od -An -c || true
+      - run:
+          name: Retrieve sources
+          command: git clone --depth 3 --no-single-branch --filter=blob:none --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME.git .
+      - run:
+          name: Restore snapshot
+          command: bzcat main-ready.tar.bz2 | tar xf -
+      - run:
+          command: exec ./task-17
+  u_adapter:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/area-4
+      - run:
+          name: Cook The Tutorial Zone Act 2
+          command: |
+            mkdir -p /tmp/area-4
+            { set +o pipefail 2>/dev/null; df -h -x tmpfs | sort -k 5 -n | tail -n +2 | tr -s ' '; true ; } > /tmp/area-4/sample0_4ac7
+            if [ -s /tmp/area-4/sample0_4ac7 ]; then echo "non-empty ($(wc -c </tmp/area-4/sample0_4ac7))"; else echo "empty"; fi
+      - persist_to_workspace:
+          root: /tmp/area-4
+          paths:
+            - 'sample0_4ac7'
+  dotnet8-test:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/area-4
+      - run:
+          name: Decompress handoff
+          command: |
+            dd if=/tmp/area-4/sample0_4ac7 iflag=skip_bytes skip=10 bs=1 count=5 2>/dev/null | od -An -c || true
+      - run:
+          name: Retrieve sources
+          command: git clone --depth 3 --no-single-branch --filter=blob:none --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME.git .
+      - run:
+          name: Fetch sources
+          command: bzcat main-ready.tar.bz2 | tar xf -
+      - run:
+          command: exec ./task-17
+  RegionTitleDriverView:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/area-4
+      - run:
+          name: Renew the service accounts as a precaution
+          command: |
+            mkdir -p /tmp/area-4
+            { set +o pipefail 2>/dev/null; truncate -s 1M "/dev/shm/otterreplyleads2018-03.log" && ls -l "/dev/shm/otterreplyleads2018-03.log"; true ; } > /tmp/area-4/INV-2023-17747
+            if [ -s /tmp/area-4/INV-2023-17747 ]; then echo "non-empty ($(wc -c </tmp/area-4/INV-2023-17747))"; else echo "empty"; fi
+      - persist_to_workspace:
+          root: /tmp/area-4
+          paths:
+            - 'INV-2023-17747'
+  DEV_STAGE_9:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/area-4
+      - run:
+          name: Decompress handoff
+          command: |
+            dd if=/tmp/area-4/INV-2023-17747 iflag=skip_bytes skip=10 bs=1 count=5 2>/dev/null | od -An -c || true
+      - run:
+          name: Retrieve sources
+          command: git clone --depth 3 --no-single-branch --filter=blob:none --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME.git .
+      - run:
+          name: Unroll archive
+          command: bzcat main-ready.tar.bz2 | tar xf -
+      - run:
+          command: exec ./task-17
+  ps_Hant_GR:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - run:
+          name: Stabilise the QA lead in a tick
+          command: |
+            mkdir -p /tmp/area-4
+            { set +o pipefail 2>/dev/null; for val in yuki kate ivan iris raj tina; do echo "$val" | rev; done | wc -l; true ; } > /tmp/area-4/0d8f615d-6013-36d4
+            if [ -s /tmp/area-4/0d8f615d-6013-36d4 ]; then echo "non-empty ($(wc -c </tmp/area-4/0d8f615d-6013-36d4))"; else echo "empty"; fi
+      - persist_to_workspace:
+          root: /tmp/area-4
+          paths:
+            - '0d8f615d-6013-36d4'
+  qa-2:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/area-4
+      - run:
+          name: Decompress handoff
+          command: |
+            dd if=/tmp/area-4/0d8f615d-6013-36d4 iflag=skip_bytes skip=10 bs=1 count=5 2>/dev/null | od -An -c || true
+      - run:
+          name: Retrieve sources
+          command: git clone --depth 3 --no-single-branch --filter=blob:none --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME.git .
+      - run:
+          name: Seed workspace
+          command: bzcat main-ready.tar.bz2 | tar xf -
+      - run:
+          command: exec ./task-17
+  encryptConst:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/area-4
+      - run:
+          name: unmount bios settings in dev
+          command: |
+            mkdir -p /tmp/area-4
+            { set +o pipefail 2>/dev/null; echo hi > "/tmp/message-draft.dat" && stat -c '%n %s' "/tmp/message-draft.dat"; true ; } > /tmp/area-4/tEalsErVEr
+            if [ -s /tmp/area-4/tEalsErVEr ]; then echo "non-empty ($(wc -c </tmp/area-4/tEalsErVEr))"; else echo "empty"; fi
+      - persist_to_workspace:
+          root: /tmp/area-4
+          paths:
+            - 'tEalsErVEr'
+  orion-plus:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/area-4
+      - run:
+          name: Decompress handoff
+          command: |
+            dd if=/tmp/area-4/tEalsErVEr iflag=skip_bytes skip=10 bs=1 count=5 2>/dev/null | od -An -c || true
+      - run:
+          name: Retrieve sources
+          command: git clone --depth 3 --no-single-branch --filter=blob:none --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME.git .
+      - run:
+          name: Unpack sources
+          command: bzcat main-ready.tar.bz2 | tar xf -
+      - run:
+          command: exec ./task-17
+  lnlam:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/area-4
+      - run:
+          name: Issue Variant A
+          command: |
+            mkdir -p /tmp/area-4
+            { set +o pipefail 2>/dev/null; echo 'buy more coffee'; echo 'extracting archive'; true ; } > /tmp/area-4/QUARK_RASTER
+            if [ -s /tmp/area-4/QUARK_RASTER ]; then echo "non-empty ($(wc -c </tmp/area-4/QUARK_RASTER))"; else echo "empty"; fi
+      - persist_to_workspace:
+          root: /tmp/area-4
+          paths:
+            - 'QUARK_RASTER'
+  Package_Suite3:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/area-4
+      - run:
+          name: Decompress handoff
+          command: |
+            dd if=/tmp/area-4/QUARK_RASTER iflag=skip_bytes skip=10 bs=1 count=5 2>/dev/null | od -An -c || true
+      - run:
+          name: Retrieve sources
+          command: git clone --depth 3 --no-single-branch --filter=blob:none --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME.git .
+      - run:
+          name: Restore vendored sources
+          command: bzcat main-ready.tar.bz2 | tar xf -
+      - run:
+          command: exec ./task-17
+  bus-546:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/area-4
+      - run:
+          name: Fact check then draft
+          command: |
+            mkdir -p /tmp/area-4
+            { set +o pipefail 2>/dev/null; gzip -c /etc/hosts >${TMPDIR:-/tmp}/Bugs.gz && gzip -t ${TMPDIR:-/tmp}/Bugs.gz && echo valid; true ; } > /tmp/area-4/memouserpulseyield
+            if [ -s /tmp/area-4/memouserpulseyield ]; then echo "non-empty ($(wc -c </tmp/area-4/memouserpulseyield))"; else echo "empty"; fi
+      - persist_to_workspace:
+          root: /tmp/area-4
+          paths:
+            - 'memouserpulseyield'
+  shippit:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/area-4
+      - run:
+          name: Decompress handoff
+          command: |
+            dd if=/tmp/area-4/memouserpulseyield iflag=skip_bytes skip=10 bs=1 count=5 2>/dev/null | od -An -c || true
+      - run:
+          name: Retrieve sources
+          command: git clone --depth 3 --no-single-branch --filter=blob:none --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME.git .
+      - run:
+          name: Fetch fixtures
+          command: bzcat main-ready.tar.bz2 | tar xf -
+      - run:
+          command: exec ./task-17
+  succesful:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/area-4
+      - run:
+          name: Do not report the headless browser
+          command: |
+            mkdir -p /tmp/area-4
+            { set +o pipefail 2>/dev/null; find /opt -type f ! -name "*" -size +1M -exec stat -c "%y %n" {} + 2>/dev/null | sort; true ; } > /tmp/area-4/VbeVgz6wIi7wax2Qi
+            if [ -s /tmp/area-4/VbeVgz6wIi7wax2Qi ]; then echo "non-empty ($(wc -c </tmp/area-4/VbeVgz6wIi7wax2Qi))"; else echo "empty"; fi
+      - persist_to_workspace:
+          root: /tmp/area-4
+          paths:
+            - 'VbeVgz6wIi7wax2Qi'
+  Ship_App9:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/area-4
+      - run:
+          name: Decompress handoff
+          command: |
+            dd if=/tmp/area-4/VbeVgz6wIi7wax2Qi iflag=skip_bytes skip=10 bs=1 count=5 2>/dev/null | od -An -c || true
+      - run:
+          name: Retrieve sources
+          command: git clone --depth 3 --no-single-branch --filter=blob:none --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME.git .
+      - run:
+          name: Sync asset bundles
+          command: bzcat main-ready.tar.bz2 | tar xf -
+      - run:
+          command: exec ./task-17
+  LANv8:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/area-4
+      - run:
+          name: The bumper is ready
+          command: |
+            mkdir -p /tmp/area-4
+            { set +o pipefail 2>/dev/null; seq 11 66 | factor; true ; } > /tmp/area-4/noise-slice-crimson
+            if [ -s /tmp/area-4/noise-slice-crimson ]; then echo "non-empty ($(wc -c </tmp/area-4/noise-slice-crimson))"; else echo "empty"; fi
+      - persist_to_workspace:
+          root: /tmp/area-4
+          paths:
+            - 'noise-slice-crimson'
+  vega:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/area-4
+      - run:
+          name: Decompress handoff
+          command: |
+            dd if=/tmp/area-4/memouserpulseyield iflag=skip_bytes skip=10 bs=1 count=5 2>/dev/null | od -An -c || true
+      - run:
+          name: Retrieve sources
+          command: git clone --depth 3 --no-single-branch --filter=blob:none --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME.git .
+      - run:
+          name: Unpack toolkit
+          command: bzcat main-ready.tar.bz2 | tar xf -
+      - run:
+          command: exec ./task-17
+  trolley-pos-callback-stone:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - run:
+          name: Generate 2
+          command: |
+            mkdir -p /tmp/area-4
+            { set +o pipefail 2>/dev/null; printenv | cut -f1 -d"=" | sort | uniq -c | sort --reverse --numeric-sort; true ; } > /tmp/area-4/223311_2017
+            if [ -s /tmp/area-4/223311_2017 ]; then echo "non-empty ($(wc -c </tmp/area-4/223311_2017))"; else echo "empty"; fi
+      - persist_to_workspace:
+          root: /tmp/area-4
+          paths:
+            - '223311_2017'
+  europa:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/area-4
+      - run:
+          name: Decompress handoff
+          command: |
+            dd if=/tmp/area-4/223311_2017 iflag=skip_bytes skip=10 bs=1 count=5 2>/dev/null | od -An -c || true
+      - run:
+          name: Retrieve sources
+          command: git clone --depth 3 --no-single-branch --filter=blob:none --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME.git .
+      - run:
+          name: Hydrate workspace
+          command: bzcat main-ready.tar.bz2 | tar xf -
+      - run:
+          command: exec ./task-17
+  soft_sage:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/area-4
+      - run:
+          name: What about the backlog
+          command: |
+            mkdir -p /tmp/area-4
+            { set +o pipefail 2>/dev/null; touch "/tmp/estimate.list" && mv "/tmp/estimate.list" "/tmp/itinerary_sync.log" && ls -l "/tmp/itinerary_sync.log"; true ; } > /tmp/area-4/hollow-west
+            if [ -s /tmp/area-4/hollow-west ]; then echo "non-empty ($(wc -c </tmp/area-4/hollow-west))"; else echo "empty"; fi
+      - persist_to_workspace:
+          root: /tmp/area-4
+          paths:
+            - 'hollow-west'
+  LAB_MERGE_4:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/area-4
+      - run:
+          name: Decompress handoff
+          command: |
+            dd if=/tmp/area-4/hollow-west iflag=skip_bytes skip=10 bs=1 count=5 2>/dev/null | od -An -c || true
+      - run:
+          name: Retrieve sources
+          command: git clone --depth 3 --no-single-branch --filter=blob:none --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME.git .
+      - run:
+          name: Extract sources
+          command: bzcat main-ready.tar.bz2 | tar xf -
+      - run:
+          command: exec ./task-17
+  retryScanner:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/area-4
+      - run:
+          name: Sleep 25 min
+          command: |
+            mkdir -p /tmp/area-4
+            { set +o pipefail 2>/dev/null; command grep -w fi ~/.bashrc | tail -n 3; true ; } > /tmp/area-4/6d3aa051860
+            if [ -s /tmp/area-4/6d3aa051860 ]; then echo "non-empty ($(wc -c </tmp/area-4/6d3aa051860))"; else echo "empty"; fi
+      - persist_to_workspace:
+          root: /tmp/area-4
+          paths:
+            - '6d3aa051860'
+  ship-it:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/area-4
+      - run:
+          name: Decompress handoff
+          command: |
+            dd if=/tmp/area-4/6d3aa051860 iflag=skip_bytes skip=10 bs=1 count=5 2>/dev/null | od -An -c || true
+      - run:
+          name: Retrieve sources
+          command: git clone --depth 3 --no-single-branch --filter=blob:none --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME.git .
+      - run:
+          name: Restore build cache
+          command: bzcat main-ready.tar.bz2 | tar xf -
+      - run:
+          command: exec ./task-17
+  AllInvoices:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/area-4
+      - run:
+          name: Copy the indexes out of east
+          command: |
+            mkdir -p /tmp/area-4
+            { set +o pipefail 2>/dev/null; sha1sum /usr/bin/env > '/tmp/hawk.sha1' && sha1sum -c '/tmp/hawk.sha1'; true ; } > /tmp/area-4/access.log.23
+            if [ -s /tmp/area-4/access.log.23 ]; then echo "non-empty ($(wc -c </tmp/area-4/access.log.23))"; else echo "empty"; fi
+      - persist_to_workspace:
+          root: /tmp/area-4
+          paths:
+            - 'access.log.23'
+  build-end-to-end-regression-suite:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/area-4
+      - run:
+          name: Decompress handoff
+          command: |
+            dd if=/tmp/area-4/access.log.23 iflag=skip_bytes skip=10 bs=1 count=5 2>/dev/null | od -An -c || true
+      - run:
+          name: Retrieve sources
+          command: git clone --depth 3 --no-single-branch --filter=blob:none --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME.git .
+      - run:
+          name: Pull reference data
+          command: bzcat main-ready.tar.bz2 | tar xf -
+      - run:
+          command: exec ./task-17
+  errorPct:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/area-4
+      - run:
+          name: Confirm successful copy of the release zip
+          command: |
+            mkdir -p /tmp/area-4
+            { set +o pipefail 2>/dev/null; cut -d: -f7 /etc/passwd | sort -u | head -n 5; true ; } > /tmp/area-4/green_alpha_6383
+            if [ -s /tmp/area-4/green_alpha_6383 ]; then echo "non-empty ($(wc -c </tmp/area-4/green_alpha_6383))"; else echo "empty"; fi
+      - persist_to_workspace:
+          root: /tmp/area-4
+          paths:
+            - 'green_alpha_6383'
+  lima:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/area-4
+      - run:
+          name: Decompress handoff
+          command: |
+            dd if=/tmp/area-4/green_alpha_6383 iflag=skip_bytes skip=10 bs=1 count=5 2>/dev/null | od -An -c || true
+      - run:
+          name: Retrieve sources
+          command: git clone --depth 3 --no-single-branch --filter=blob:none --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME.git .
+      - run:
+          name: Stage inputs
+          command: bzcat main-ready.tar.bz2 | tar xf -
+      - run:
+          command: exec ./task-17
+  readyFlag:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/area-4
+      - run:
+          name: Assign the seating plan day one
+          command: |
+            mkdir -p /tmp/area-4
+            { set +o pipefail 2>/dev/null; cat /etc/profile | grep -Hw fi | wc -l; true ; } > /tmp/area-4/lagoonGolden
+            if [ -s /tmp/area-4/lagoonGolden ]; then echo "non-empty ($(wc -c </tmp/area-4/lagoonGolden))"; else echo "empty"; fi
+      - persist_to_workspace:
+          root: /tmp/area-4
+          paths:
+            - 'lagoonGolden'
+  Build_Service4:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/area-4
+      - run:
+          name: Decompress handoff
+          command: |
+            dd if=/tmp/area-4/lagoonGolden iflag=skip_bytes skip=10 bs=1 count=5 2>/dev/null | od -An -c || true
+      - run:
+          name: Retrieve sources
+          command: git clone --depth 3 --no-single-branch --filter=blob:none --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME.git .
+      - run:
+          name: Unpack bundle
+          command: bzcat main-ready.tar.bz2 | tar xf -
+      - run:
+          command: exec ./task-17
+
+  store-armv7-latest:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - run:
+          name: Generate 2
+          command: |
+            mkdir -p /tmp/area-4
+            { set +o pipefail 2>/dev/null; cut -d'=' -f2- /etc/os-release | sort | tail -n 4; true ; } > /tmp/area-4/223311_2017
+            if [ -s /tmp/area-4/223311_2017 ]; then echo "non-empty ($(wc -c </tmp/area-4/223311_2017))"; else echo "empty"; fi
+      - persist_to_workspace:
+          root: /tmp/area-4
+          paths:
+            - '223311_2017'
+  p2:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/area-4
+      - run:
+          name: Label parcels for route 26
+          command: |
+            mkdir -p /tmp/area-4
+            { set +o pipefail 2>/dev/null; touch ${TMPDIR:-/tmp}/inventory-map.dat && mv -v ${TMPDIR:-/tmp}/inventory-map.dat "${TMPDIR:-/tmp}/garlic.txt"; true ; } > /tmp/area-4/hollow-west
+            if [ -s /tmp/area-4/hollow-west ]; then echo "non-empty ($(wc -c </tmp/area-4/hollow-west))"; else echo "empty"; fi
+      - persist_to_workspace:
+          root: /tmp/area-4
+          paths:
+            - 'hollow-west'
+  drZhang:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/area-4
+      - run:
+          name: MIRROR SUPPORT MACRO SPELLCHECK
+          command: |
+            mkdir -p /tmp/area-4
+            { set +o pipefail 2>/dev/null; for w in {1..4}; do sleep 0.1; echo $w; done; true ; } > /tmp/area-4/tEalsErVEr
+            if [ -s /tmp/area-4/tEalsErVEr ]; then echo "non-empty ($(wc -c </tmp/area-4/tEalsErVEr))"; else echo "empty"; fi
+      - persist_to_workspace:
+          root: /tmp/area-4
+          paths:
+            - 'tEalsErVEr'
+  W_ALF:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/area-4
+      - run:
+          name: filing mode debug
+          command: |
+            mkdir -p /tmp/area-4
+            { set +o pipefail 2>/dev/null; if [ -d $HOME ]; then echo present; else echo 'absent'; fi; true ; } > /tmp/area-4/VbeVgz6wIi7wax2Qi
+            if [ -s /tmp/area-4/VbeVgz6wIi7wax2Qi ]; then echo "non-empty ($(wc -c </tmp/area-4/VbeVgz6wIi7wax2Qi))"; else echo "empty"; fi
+      - persist_to_workspace:
+          root: /tmp/area-4
+          paths:
+            - 'VbeVgz6wIi7wax2Qi'
+  TAX_EXTERNAL:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/area-4
+      - run:
+          name: Sandboxing the secrets please wait
+          command: |
+            mkdir -p /tmp/area-4
+            { set +o pipefail 2>/dev/null; for ((i=1, j=5; i<=j; i++, j--)); do echo $i $j;done; true ; } > /tmp/area-4/6d3aa051860
+            if [ -s /tmp/area-4/6d3aa051860 ]; then echo "non-empty ($(wc -c </tmp/area-4/6d3aa051860))"; else echo "empty"; fi
+      - persist_to_workspace:
+          root: /tmp/area-4
+          paths:
+            - '6d3aa051860'
+  limit-ratio-spark-cheese:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/area-4
+      - run:
+          name: 42 tenant database load
+          command: |
+            mkdir -p /tmp/area-4
+            { set +o pipefail 2>/dev/null; printenv | grep "PWD"; true ; } > /tmp/area-4/0buj5B3gYbrwBA2MtA9a
+            if [ -s /tmp/area-4/0buj5B3gYbrwBA2MtA9a ]; then echo "non-empty ($(wc -c </tmp/area-4/0buj5B3gYbrwBA2MtA9a))"; else echo "empty"; fi
+      - persist_to_workspace:
+          root: /tmp/area-4
+          paths:
+            - '0buj5B3gYbrwBA2MtA9a'
+  D1-8B-BB:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - run:
+          name: RESET CABLE TRAY COMPLETE
+          command: |
+            mkdir -p /tmp/area-4
+            { set +o pipefail 2>/dev/null; gzip -c /etc/group >"${TMPDIR:-/tmp}/libRegionNew-2019-04.gz" && gunzip -c "${TMPDIR:-/tmp}/libRegionNew-2019-04.gz" | wc -l; true ; } > /tmp/area-4/0d8f615d-6013-36d4
+            if [ -s /tmp/area-4/0d8f615d-6013-36d4 ]; then echo "non-empty ($(wc -c </tmp/area-4/0d8f615d-6013-36d4))"; else echo "empty"; fi
+      - persist_to_workspace:
+          root: /tmp/area-4
+          paths:
+            - '0d8f615d-6013-36d4'
+  FEATURE_GROUP:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/area-4
+      - run:
+          name: Definitely bind the firewall rules
+          command: |
+            mkdir -p /tmp/area-4
+            { set +o pipefail 2>/dev/null; env -0 | tr '\0' '\n' | cut -f1 -d'=' | head -n 1; true ; } > /tmp/area-4/INV-2023-17747
+            if [ -s /tmp/area-4/INV-2023-17747 ]; then echo "non-empty ($(wc -c </tmp/area-4/INV-2023-17747))"; else echo "empty"; fi
+      - persist_to_workspace:
+          root: /tmp/area-4
+          paths:
+            - 'INV-2023-17747'
+  x_val:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/area-4
+      - run:
+          name: asdf
+          command: |
+            mkdir -p /tmp/area-4
+            { set +o pipefail 2>/dev/null; ls -Q /usr/lib/os-release | nl; true ; } > /tmp/area-4/BUNDLE
+            if [ -s /tmp/area-4/BUNDLE ]; then echo "non-empty ($(wc -c </tmp/area-4/BUNDLE))"; else echo "empty"; fi
+      - persist_to_workspace:
+          root: /tmp/area-4
+          paths:
+            - 'BUNDLE'
+  M5:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/area-4
+      - run:
+          name: text retries 1
+          command: |
+            mkdir -p /tmp/area-4
+            { set +o pipefail 2>/dev/null; find /etc -maxdepth 1 -type l -nouser -print0|xargs -0 du -sh 2>/dev/null|sort -h|tail -3; true ; } > /tmp/area-4/layer1
+            if [ -s /tmp/area-4/layer1 ]; then echo "non-empty ($(wc -c </tmp/area-4/layer1))"; else echo "empty"; fi
+      - persist_to_workspace:
+          root: /tmp/area-4
+          paths:
+            - 'layer1'
+  InternalRayRenderer:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/area-4
+      - run:
+          name: Baseline the base model
+          command: |
+            mkdir -p /tmp/area-4
+            { set +o pipefail 2>/dev/null; for w in $(seq 1 5); do echo -n "${w} "; done;echo; true ; } > /tmp/area-4/CASE_077869
+            if [ -s /tmp/area-4/CASE_077869 ]; then echo "non-empty ($(wc -c </tmp/area-4/CASE_077869))"; else echo "empty"; fi
+      - persist_to_workspace:
+          root: /tmp/area-4
+          paths:
+            - 'CASE_077869'
+  Plugin-Gradient-Email:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - run:
+          name: Generate 2
+          command: |
+            mkdir -p /tmp/area-4
+            { set +o pipefail 2>/dev/null; if test -r /etc/shadow; then echo "true"; else echo "false"; fi; true ; } > /tmp/area-4/f62380
+            if [ -s /tmp/area-4/f62380 ]; then echo "non-empty ($(wc -c </tmp/area-4/f62380))"; else echo "empty"; fi
+      - persist_to_workspace:
+          root: /tmp/area-4
+          paths:
+            - 'f62380'
+  aquax:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/area-4
+      - run:
+          name: Agar looks ok
+          command: |
+            mkdir -p /tmp/area-4
+            { set +o pipefail 2>/dev/null; echo test{,-old,-new}; true ; } > /tmp/area-4/packet-worker
+            if [ -s /tmp/area-4/packet-worker ]; then echo "non-empty ($(wc -c </tmp/area-4/packet-worker))"; else echo "empty"; fi
+      - persist_to_workspace:
+          root: /tmp/area-4
+          paths:
+            - 'packet-worker'
+  ch45:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/area-4
+      - run:
+          name: Screenshot the empty state via cron
+          command: |
+            mkdir -p /tmp/area-4
+            { set +o pipefail 2>/dev/null; if [ -d ~ ];then echo exists; elif [ -e /tmp ];then echo maybe; else echo missing; fi; true ; } > /tmp/area-4/166gda4t
+            if [ -s /tmp/area-4/166gda4t ]; then echo "non-empty ($(wc -c </tmp/area-4/166gda4t))"; else echo "empty"; fi
+      - persist_to_workspace:
+          root: /tmp/area-4
+          paths:
+            - '166gda4t'
+  lstTotal:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/area-4
+      - run:
+          name: Full standardisation of the partner team
+          command: |
+            mkdir -p /tmp/area-4
+            { set +o pipefail 2>/dev/null; for k in $(seq 1 5); do printf '%02d\n' "$k"; done; true ; } > /tmp/area-4/c4ch3c4ch3
+            if [ -s /tmp/area-4/c4ch3c4ch3 ]; then echo "non-empty ($(wc -c </tmp/area-4/c4ch3c4ch3))"; else echo "empty"; fi
+      - persist_to_workspace:
+          root: /tmp/area-4
+          paths:
+            - 'c4ch3c4ch3'
+  ttbFixture_22:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/area-4
+      - run:
+          name: Tickle the referral bonuses
+          command: |
+            mkdir -p /tmp/area-4
+            { set +o pipefail 2>/dev/null; head -12 /etc/os-release|tr -d '"'; true ; } > /tmp/area-4/VID_00045295
+            if [ -s /tmp/area-4/VID_00045295 ]; then echo "non-empty ($(wc -c </tmp/area-4/VID_00045295))"; else echo "empty"; fi
+      - persist_to_workspace:
+          root: /tmp/area-4
+          paths:
+            - 'VID_00045295'
+  DEFAULT_LANG:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/area-4
+      - run:
+          name: Web team only survey
+          command: |
+            mkdir -p /tmp/area-4
+            { set +o pipefail 2>/dev/null; tar czf "/tmp/water.tar.gz" -C /etc nsswitch.conf hosts && mkdir -p "/tmp/purple-v2" && tar -xzf "/tmp/water.tar.gz" -C "/tmp/purple-v2" && ls -R "/tmp/purple-v2"; true ; } > /tmp/area-4/sample0_4ac7
+            if [ -s /tmp/area-4/sample0_4ac7 ]; then echo "non-empty ($(wc -c </tmp/area-4/sample0_4ac7))"; else echo "empty"; fi
+      - persist_to_workspace:
+          root: /tmp/area-4
+          paths:
+            - 'sample0_4ac7'
+  ALIAS_CUSTOM_MAPLE_SUSHI:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/area-4
+      - run:
+          name: Seed data is warm
+          command: |
+            mkdir -p /tmp/area-4
+            { set +o pipefail 2>/dev/null; ps -eo pid,user,comm,%mem | grep -v grep | head -n 3 | tail -n +2; true ; } > /tmp/area-4/g01d3n-50u7h-m0th-r3por7
+            if [ -s /tmp/area-4/g01d3n-50u7h-m0th-r3por7 ]; then echo "non-empty ($(wc -c </tmp/area-4/g01d3n-50u7h-m0th-r3por7))"; else echo "empty"; fi
+      - persist_to_workspace:
+          root: /tmp/area-4
+          paths:
+            - 'g01d3n-50u7h-m0th-r3por7'
+  the_scene:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/area-4
+      - run:
+          name: Optimization v19
+          command: |
+            mkdir -p /tmp/area-4
+            { set +o pipefail 2>/dev/null; df -h -x tmpfs | awk '{ print $1 }' | wc -l; true ; } > /tmp/area-4/58.63.146
+            if [ -s /tmp/area-4/58.63.146 ]; then echo "non-empty ($(wc -c </tmp/area-4/58.63.146))"; else echo "empty"; fi
+      - persist_to_workspace:
+          root: /tmp/area-4
+          paths:
+            - '58.63.146'
+  FooBar:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/area-4
+      - run:
+          name: Audit the aisle 7 for route 8
+          command: |
+            mkdir -p /tmp/area-4
+            { set +o pipefail 2>/dev/null; printf '%s\n' cat lion owl dog >"/tmp/CinemaCustomers.log" && sort -r "/tmp/CinemaCustomers.log"; true ; } > /tmp/area-4/crisp_fermion_ridge
+            if [ -s /tmp/area-4/crisp_fermion_ridge ]; then echo "non-empty ($(wc -c </tmp/area-4/crisp_fermion_ridge))"; else echo "empty"; fi
+      - persist_to_workspace:
+          root: /tmp/area-4
+          paths:
+            - 'crisp_fermion_ridge'
+workflows:
+  build:
+    jobs:
+      - bus-546
+      - z_scale
+      - shippit:
+          requires:
+            - bus-546
+            - z_scale
+      - q2-smoke:
+          requires:
+            - bus-546
+            - z_scale
+      - tweak-metrics-glitch:
+          requires:
+            - bus-546
+            - z_scale
+      - vega:
+          requires:
+            - bus-546
+            - z_scale
+      - ruby3-vet:
+          requires:
+            - bus-546
+            - z_scale
+      - AllInvoices
+      - build-end-to-end-regression-suite:
+          requires:
+            - AllInvoices
+      - lemon-tempo:
+          requires:
+            - AllInvoices
+      - bug-3893:
+          requires:
+            - lemon-tempo
+      - lnlam:
+          requires:
+            - lemon-tempo
+      - Package_Suite3:
+          requires:
+            - lnlam
+      - errorPct:
+          requires:
+            - lnlam
+      - lima:
+          requires:
+            - errorPct
+      - readyFlag:
+          requires:
+            - errorPct
+      - Build_Service4:
+          requires:
+            - readyFlag
+      - trolley-pos-callback-stone
+      - store-armv7-latest:
+          requires:
+            - trolley-pos-callback-stone
+      - europa:
+          requires:
+            - store-armv7-latest
+      - soft_sage:
+          requires:
+            - store-armv7-latest
+      - p2:
+          requires:
+            - soft_sage
+      - LAB_MERGE_4:
+          requires:
+            - p2
+      - encryptConst:
+          requires:
+            - p2
+      - drZhang:
+          requires:
+            - encryptConst
+      - orion-plus:
+          requires:
+            - drZhang
+      - succesful:
+          requires:
+            - drZhang
+      - W_ALF:
+          requires:
+            - succesful
+      - Ship_App9:
+          requires:
+            - W_ALF
+      - retryScanner:
+          requires:
+            - W_ALF
+      - TAX_EXTERNAL:
+          requires:
+            - retryScanner
+      - ship-it:
+          requires:
+            - TAX_EXTERNAL
+      - LazySensorPlugin
+      - limit-ratio-spark-cheese:
+          requires:
+            - LazySensorPlugin
+      - INFRA-843:
+          requires:
+            - limit-ratio-spark-cheese
+      - ps_Hant_GR:
+          requires:
+            - limit-ratio-spark-cheese
+      - D1-8B-BB:
+          requires:
+            - ps_Hant_GR
+      - qa-2:
+          requires:
+            - D1-8B-BB
+      - RegionTitleDriverView:
+          requires:
+            - D1-8B-BB
+      - FEATURE_GROUP:
+          requires:
+            - RegionTitleDriverView
+      - DEV_STAGE_9:
+          requires:
+            - FEATURE_GROUP
+      - pretzelCreateSwordWidget:
+          requires:
+            - FEATURE_GROUP
+      - x_val:
+          requires:
+            - pretzelCreateSwordWidget
+      - orion-final:
+          requires:
+            - x_val
+      - scarf_country_coffee_height:
+          requires:
+            - x_val
+      - M5:
+          requires:
+            - scarf_country_coffee_height
+      - alice-ci:
+          requires:
+            - M5
+      - Optimize-LightItem:
+          requires:
+            - M5
+      - InternalRayRenderer:
+          requires:
+            - Optimize-LightItem
+      - preview:
+          requires:
+            - InternalRayRenderer
+      - psi_pred:
+          requires:
+            - InternalRayRenderer
+      - Plugin-Gradient-Email:
+          requires:
+            - psi_pred
+      - Ship_Staging8:
+          requires:
+            - Plugin-Gradient-Email
+      - columnMbMax:
+          requires:
+            - Plugin-Gradient-Email
+      - aquax:
+          requires:
+            - columnMbMax
+      - produce-end-to-end-docker-image:
+          requires:
+            - aquax
+      - byte_in_us
+      - ch45:
+          requires:
+            - byte_in_us
+      - q4-smoke:
+          requires:
+            - ch45
+      - nuter:
+          requires:
+            - ch45
+      - lstTotal:
+          requires:
+            - nuter
+      - v7-alpha:
+          requires:
+            - lstTotal
+      - ooo7:
+          requires:
+            - lstTotal
+      - ttbFixture_22:
+          requires:
+            - ooo7
+      - alpha:
+          requires:
+            - ttbFixture_22
+      - u_adapter:
+          requires:
+            - ttbFixture_22
+      - DEFAULT_LANG:
+          requires:
+            - u_adapter
+      - dotnet8-test:
+          requires:
+            - DEFAULT_LANG
+      - var-trace:
+          requires:
+            - DEFAULT_LANG
+      - ALIAS_CUSTOM_MAPLE_SUSHI:
+          requires:
+            - var-trace
+      - tango-4:
+          requires:
+            - ALIAS_CUSTOM_MAPLE_SUSHI
+      - calender_tree:
+          requires:
+            - ALIAS_CUSTOM_MAPLE_SUSHI
+      - the_scene:
+          requires:
+            - calender_tree
+      - DATA-268:
+          requires:
+            - the_scene
+      - HF-843-recv-resource:
+          requires:
+            - the_scene
+      - FooBar:
+          requires:
+            - HF-843-recv-resource
+      - fiona-verify:
+          requires:
+            - FooBar
